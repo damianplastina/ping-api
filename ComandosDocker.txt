@@ -1,0 +1,10 @@
+docker build -t ping-app .
+
+docker run \
+  -it \
+  --rm \
+  -p 8081:80 \
+  --name ping-app-container \
+  ping-app
+
+docker exec -it ping-app-container /bin/bash
