@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,31 @@ public class PingController : ControllerBase
     [HttpGet(Name = "ping")]
     public ActionResult<string> Get()
     {
+        int duracionEnMilis = 2000; 
+        SimularCargaDeCpu(duracionEnMilis);
+        
         string respuesta = $"pong - Server IP: {_localIpAddress}";
         _logger.LogInformation(respuesta);
         return respuesta;
+    }
+    
+    private void SimularCargaDeCpu(int duracionEnMilis)
+    {
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
+        // Ejecuta un bucle mientras el tiempo de duración no haya terminado
+        while (stopwatch.ElapsedMilliseconds < duracionEnMilis)
+        {
+            // Realiza cálculos intensivos para consumir CPU
+            for (int i = 0; i < 1000000; i++)
+            {
+                double result = Math.Sqrt(i);
+            }
+
+        }
+
+        stopwatch.Stop();
     }
     
     private string GetLocalIPAddress()
