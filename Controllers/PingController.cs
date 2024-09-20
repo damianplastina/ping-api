@@ -28,7 +28,7 @@ public class PingController : ControllerBase
         _logger.LogInformation(respuesta);
         return respuesta;
     }
-    
+
     private void SimularCargaDeCpu(int duracionEnMilis)
     {
         Stopwatch stopwatch = new Stopwatch();
